@@ -1,0 +1,605 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-dark: #f0f2f5;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f9fafb;
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --danger: #ef4444;
+  --danger-hover: #dc2626;
+  --sidebar-w: 260px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Layout */
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+  width: var(--sidebar-w);
+  background-color: var(--bg-card);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  padding: 24px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sidebar-nav {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.nav-link:hover, .nav-link.active {
+  background-color: var(--accent);
+  color: #fff;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 40px;
+}
+
+.page-title {
+  font-size: 1.8rem;
+  margin-bottom: 24px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Cards & Panels */
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+/* Forms */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.form-control {
+  width: 100%;
+  background-color: var(--bg-dark);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.file-dropzone {
+  border: 2px dashed var(--border);
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background-color: rgba(255,255,255,0.02);
+}
+
+.file-dropzone:hover {
+  border-color: var(--accent);
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+.btn {
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+
+.btn:hover {
+  background-color: var(--accent-hover);
+}
+
+.btn-danger {
+  background-color: var(--danger);
+}
+
+.btn-danger:hover {
+  background-color: var(--danger-hover);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Tables */
+.table-scroll-wrapper {
+  overflow: auto;          /* both axes */
+  max-height: calc(100vh - 220px); /* vertical scroll when list grows */
+  border-radius: 12px;     /* match card shape */
+}
+
+/* Sticky header so column labels stay visible while scrolling down */
+.table-scroll-wrapper thead th {
+  position: sticky;
+  top: 0;
+  background-color: var(--bg-card);
+  z-index: 1;
+}
+
+.data-table {
+  width: max-content;      /* grow with content instead of capping at 100% */
+  min-width: 100%;         /* but never smaller than the container */
+  border-collapse: collapse;
+}
+
+.data-table th, .data-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;     /* prevent individual cells from wrapping */
+}
+
+/* Give each column a sensible minimum so text is readable */
+.data-table th:nth-child(2),
+.data-table td:nth-child(2) { min-width: 240px; }  /* File Name */
+.data-table th:nth-child(3),
+.data-table td:nth-child(3) { min-width: 160px; }  /* Business Unit */
+.data-table th:nth-child(4),
+.data-table td:nth-child(4) { min-width: 160px; }  /* Business Area */
+.data-table th:nth-child(5),
+.data-table td:nth-child(5) { min-width: 180px; }  /* Business Function */
+.data-table th:nth-child(6),
+.data-table td:nth-child(6) { min-width: 160px; }  /* Application Name */
+.data-table th:nth-child(7),
+.data-table td:nth-child(7) { min-width: 120px; }  /* Upload Date */
+
+.data-table th {
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 1px 0 var(--border); /* border under sticky header */
+}
+
+.data-table tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table tbody tr:hover {
+  background-color: var(--bg-card-hover);
+}
+
+.badge {
+  background-color: rgba(59, 130, 246, 0.15);
+  color: var(--accent);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* ─────────── Chat UI ─────────── */
+
+.chat-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  padding: 0;
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 32px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-card);
+  flex-shrink: 0;
+}
+
+.chat-split-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.chat-pane {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  background: var(--bg-dark);
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chat-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 60px 20px;
+  flex: 1;
+}
+
+.chat-bubble-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.chat-bubble-row.user { flex-direction: row-reverse; }
+
+.chat-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-muted);
+}
+.chat-bubble-row.user .chat-avatar {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.chat-bubble {
+  max-width: 75%;
+  padding: 12px 16px;
+  position: relative;
+  border-radius: 14px;
+  font-size: 0.93rem;
+  line-height: 1.6;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  word-break: break-word;
+}
+.chat-bubble.user {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  border-bottom-right-radius: 4px;
+}
+.chat-bubble.assistant { border-bottom-left-radius: 4px; }
+
+.chat-answer { line-height: 1.65; }
+
+.chat-sources {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.typing-indicator { display: flex; gap: 5px; align-items: center; padding: 4px 2px; }
+.typing-indicator span {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent); opacity: 0.6;
+  animation: bounce 1.2s infinite ease-in-out;
+}
+.typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+  40%           { transform: translateY(-6px); opacity: 1; }
+}
+
+.chat-input-bar {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-card);
+  flex-shrink: 0;
+}
+
+.chat-textarea {
+  flex: 1;
+  background: var(--bg-dark);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  resize: none;
+  min-height: 46px;
+  max-height: 160px;
+  overflow-y: auto;
+  transition: border-color 0.2s;
+  line-height: 1.5;
+}
+.chat-textarea:focus { outline: none; border-color: var(--accent); }
+
+.chat-send-btn { padding: 12px 16px; border-radius: 10px; flex-shrink: 0; }
+.chat-send-btn:disabled { opacity: 0.4; }
+
+.chat-divider {
+  width: 6px;
+  cursor: col-resize;
+  background: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s;
+  user-select: none;
+}
+.chat-divider:hover, .chat-divider:active { background: var(--accent); }
+.chat-divider-handle {
+  width: 3px; height: 40px;
+  border-radius: 2px;
+  background: var(--text-muted);
+  opacity: 0.4;
+}
+
+.debug-pane {
+  display: flex;
+  flex-direction: column;
+  background: #1a1d23;
+  color: #c8d3da;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.78rem;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.debug-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #13151a;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  font-size: 0.8rem;
+  color: #8b9baa;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+.debug-log {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  line-height: 1.7;
+}
+
+.debug-line { color: #a8b8c8; }
+.debug-line.separator { color: #4a6a8a; font-style: italic; margin: 4px 0; }
+.debug-line.error { color: #f87171; }
+
+/* ─────────── Token / Cost Status Bar ─────────── */
+
+.token-status-bar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 7px 28px;
+  background: linear-gradient(90deg, rgba(37,99,235,0.06) 0%, rgba(37,99,235,0.02) 100%);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.token-status-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 0;
+}
+
+.token-status-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-right: 2px;
+}
+
+.token-status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.76rem;
+  padding: 3px 8px;
+  border-radius: 20px;
+  background: rgba(37,99,235,0.08);
+  color: #2563eb;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.token-status-chip.cost {
+  background: rgba(16,185,129,0.1);
+  color: #059669;
+}
+
+.token-status-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--border);
+  margin: 0 10px;
+  flex-shrink: 0;
+}
+
+.token-sep {
+  opacity: 0.5;
+  margin: 0 1px;
+}
+
+/* ─────────── Per-bubble Token Meta ─────────── */
+
+.chat-bubble-wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 75%;
+  gap: 4px;
+}
+
+/* user row reverses direction so wrapper aligns to the right */
+.chat-bubble-row.user .chat-bubble-wrapper {
+  align-items: flex-end;
+}
+.chat-bubble-row.assistant .chat-bubble-wrapper {
+  align-items: flex-start;
+}
+
+/* bubble itself should take full width of wrapper */
+.chat-bubble-wrapper .chat-bubble {
+  max-width: 100%;
+}
+
+.token-meta {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.token-meta-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.68rem;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+
+.user-meta .token-meta-chip {
+  background: rgba(37,99,235,0.12);
+  color: #1d4ed8;
+}
+
+.assistant-meta .token-meta-chip {
+  background: rgba(107,114,128,0.1);
+  color: var(--text-muted);
+}
+
+.token-meta-chip.cost {
+  background: rgba(16,185,129,0.1);
+  color: #059669;
+}
+
+/* Copy button styling */
+.copy-btn {
+  background: rgba(0,0,0,0.05);
+  border: none;
+  border-radius: 4px;
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  color: var(--text-muted);
+}
+
+.copy-btn:hover {
+  background: rgba(0,0,0,0.1);
+  color: var(--accent);
+}
+
+.chat-bubble.user .copy-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+}
+
+.chat-bubble.user .copy-btn:hover {
+  background: rgba(255,255,255,0.25);
+}

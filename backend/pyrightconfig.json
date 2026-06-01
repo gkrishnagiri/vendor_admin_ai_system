@@ -1,0 +1,14 @@
+{
+  "venvPath": ".",
+  "venv": ".venv",
+  "pythonVersion": "3.12",
+  "pythonPlatform": "Linux",
+  "pythonPath": ".venv/bin/python",
+  "include": [
+    "."
+  ],
+  "exclude": [
+    ".venv",
+    "__pycache__"
+  ]
+}
