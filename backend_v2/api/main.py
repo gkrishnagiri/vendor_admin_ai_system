@@ -9,7 +9,12 @@ import os
 from dotenv import load_dotenv
 
 # IMPORTANT: Load environment before importing internal modules that use them
-load_dotenv()
+from pathlib import Path
+from dotenv import load_dotenv
+
+# Load the project-root .env file
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+load_dotenv(PROJECT_ROOT / ".env")
 
 from orchestrator.supervisor import run_chat_v2
 from api.admin_router import router as admin_router

@@ -1,3 +1,10 @@
+from pathlib import Path
+from dotenv import load_dotenv
+
+# Load the project-root .env file
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+load_dotenv(PROJECT_ROOT / ".env")
+
 from fastapi import FastAPI
 from api.rag import router as rag_router
 from api.admin import router as admin_router
